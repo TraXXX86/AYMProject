@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Alert, Text, View, KeyboardAvoidingView, Dimensions, StyleSheet} from 'react-native';
-import {Header, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements'
+import {Header, Divider, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements'
 import AYM from '../AYM/AYM';
 //import FBLoginButton from './FBLoginButton';
+import {withNavigation} from 'react-navigation';
 
 //var FBLoginButton = require('./FBLoginButton');
 
@@ -15,93 +16,82 @@ class Authentification extends Component {
         this.state = {
             user_name: '',
             user_profil: 'learner',
-            server_name: 'test',
+            server_url: 'test',
             meeting_id: '1AF',
-            navigation: props.navigation,
         };
 
-        //this.serverNameInput = React.createRef();
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    /**
-     * Update component state on each change
-     * @param event
-     */
-    handleChange(event) {
-        // Update a partial state
-        /*this.setState({
-            [event.target.id]: event.target.value,
-        });*/
-        /*console.log(this.serverNameInput);
-        this.setState({
-            ['server_name']: this.serverNameInput.current,
-        });*/
+        this.navigation = this.props.navigation;
     }
 
     /**
      * Open AYM application when user is connected
-     * @param event
      */
-    handleSubmit(event) {
-        // TODO : Get the correct id from DB ?
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * Math.floor(max));
-        }
-
-        let user_id = getRandomInt(19);
-
-        this.state.navigation();
-        // Open AYM application for selected User and selected meeting
-        /*const aym = (
-         <div>
-         <AYM server={this.state.server_name} meeting_id={this.state.meeting_id} user_id={this.state.user_name} user_name={this.state.user_name} user_profil={this.state.user_profil}/>
-         </div>
-         );*/
-        //ReactDOM.render(aym, document.getElementById('root'));
-    }
-
-    submitForm(){
-        //console.log(this.state)
+    submitForm() {
         //Alert.alert('🎸', 'You rock ')
-        //this.props.navigation.navigate('Home');
-        //this.state.navigation.navigate('Home')
-        //this.state.navigation;
-    }
 
+        console.log(this.state);
+
+        this.navigation.navigate('Home', {
+         'server_url': this.state.server_url,
+         'meeting_id': this.state.meeting_id,
+         'user_name': this.state.user_name,
+         'user_profil': this.state.user_profil,
+         });
+    }
 
     render() {
-
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <Header
                     centerComponent={{text: 'Authentification', style: {color: '#fff'}}}
                 />
-                <View style={{alignItems: 'center'}}>
+                <View style={{flex: 1, padding: 10}}>
+                    <FormLabel>Server :</FormLabel>
                     <FormInput
                         icon="user"
-                        value={this.state.server_name}
-                        onChangeText={this.handleChange()}
+                        value={this.state.server_url}
+                        onChangeText={server_url => this.setState({server_url})}
                         placeholder="Server Name"
                     />
+                    <FormLabel>User Name :</FormLabel>
+                    <FormInput
+                        icon="user"
+                        value={this.state.user_name}
+                        onChangeText={user_name => this.setState({user_name})}
+                        placeholder="User Name"
+                    />
+                    <FormLabel>Select your profile:</FormLabel>
+                    <FormInput
+                        icon="user"
+                        value={this.state.user_profil}
+                        onChangeText={user_profil => this.setState({user_profil})}
+                        placeholder="User Profil"
+                    />
+                    <FormLabel>Select your meeting room:</FormLabel>
+                    <FormInput
+                        icon="user"
+                        value={this.state.meeting_id}
+                        onChangeText={meeting_id => this.setState({meeting_id})}
+                        placeholder="Meeting Room"
+                    />
                 </View>
-                <Button
-                    title="SIGNUP"
-                    buttonStyle={styles.signUpButton}
-                    linearGradientProps={{
-                        colors: ['#FF9800', '#F44336'],
-                        start: [1, 0],
-                        end: [0.2, 0],
-                    }}
-                    titleStyle={styles.signUpButtonText}
-                    onPress={this.state.navigation}
-                />
+                <View style={{padding: 15}}>
+                    <Button
+                        title="Se connecter"
+                        buttonStyle={styles.signUpButton}
+                        linearGradientProps={{
+                            colors: ['#FF9800', '#F44336'],
+                            start: [1, 0],
+                            end: [0.2, 0],
+                        }}
+                        titleStyle={styles.signUpButtonText}
+                        icon={{name: 'sign-in', type: 'font-awesome'}}
+                        onPress={() => this.submitForm()}
+                    />
+                </View>
             </View>
         );
     }
-
 
     /*
      <FBLoginButton></FBLoginButton>
@@ -140,8 +130,7 @@ class Authentification extends Component {
      */
 }
 
-export default Authentification;
-
+export default withNavigation(Authentification);
 
 const styles = StyleSheet.create({
     container: {
@@ -222,7 +211,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
     },
     signUpButton: {
-        width: 250,
         borderRadius: 50,
         height: 45,
     },

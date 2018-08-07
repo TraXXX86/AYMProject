@@ -26,7 +26,7 @@ class PptReader extends Component {
 
     render() {
         console.log('Slide to show : ' + this.props.image);
-        console.log('read_only' + this.state.read_only);
+        //console.log('read_only' + this.state.read_only);
         return (
             <View style={{
                 flex: 1,

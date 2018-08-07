@@ -10,7 +10,7 @@ class AuthentificationScreen extends React.Component {
     render() {
         return (
             <View style={{flex: 1}}>
-                <Authentification navigation={() => this.props.navigation.navigate('Home')}/>
+                <Authentification />
             </View>
         );
     }
@@ -23,7 +23,7 @@ class HomeScreen extends React.Component {
                 <Header
                     leftComponent={
                         <Icon
-                            name='home'
+                            name='sign-out'
                             type='font-awesome'
                             color='#fff'
                             onPress={() => {
@@ -34,7 +34,7 @@ class HomeScreen extends React.Component {
                     centerComponent={{text: 'AYM', style: {color: '#fff'}}}
                     rightComponent={
                         <Icon
-                            name='angle-right'
+                            name='question-circle'
                             type='font-awesome'
                             color='#fff'
                             onPress={() => {
@@ -44,7 +44,7 @@ class HomeScreen extends React.Component {
                     }
                 />
                 <AYM server=""
-                     meeting_id=""
+                     meeting_id="1AF"
                      user_id="Prof"
                      user_name="Prof"
                      user_profil="teacher"/>
