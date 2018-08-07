@@ -4,6 +4,17 @@ import {Header, Icon} from 'react-native-elements';
 import {createStackNavigator} from 'react-navigation';
 
 import AYM from './src/component/AYM/AYM';
+import Authentification from './src/component/Authentification/Authentification';
+
+class AuthentificationScreen extends React.Component {
+    render() {
+        return (
+            <View style={{flex: 1}}>
+                <Authentification navigation={() => this.props.navigation.navigate('Home')}/>
+            </View>
+        );
+    }
+}
 
 class HomeScreen extends React.Component {
     render() {
@@ -15,6 +26,9 @@ class HomeScreen extends React.Component {
                             name='home'
                             type='font-awesome'
                             color='#fff'
+                            onPress={() => {
+                                this.props.navigation.navigate('Authentification');
+                            }}
                         />
                     }
                     centerComponent={{text: 'AYM', style: {color: '#fff'}}}
@@ -24,10 +38,7 @@ class HomeScreen extends React.Component {
                             type='font-awesome'
                             color='#fff'
                             onPress={() => {
-                                this.props.navigation.navigate('Details', {
-                                    itemId: 86,
-                                    otherParam: 'anything you want here',
-                                });
+                                this.props.navigation.navigate('Details');
                             }}
                         />
                     }
@@ -54,10 +65,7 @@ class DetailsScreen extends React.Component {
                             type='font-awesome'
                             color='#fff'
                             onPress={() => {
-                                this.props.navigation.navigate('Home', {
-                                    itemId: 86,
-                                    otherParam: 'anything you want here',
-                                });
+                                this.props.navigation.navigate('Home');
                             }}
                         />
                     }
@@ -86,10 +94,16 @@ const RootStack = createStackNavigator(
                 title: 'Home',
             },
         },
+        Authentification: {
+            screen: AuthentificationScreen,
+            navigationOptions: {
+                title: 'Authentification',
+            },
+        },
         Details: DetailsScreen,
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Authentification',
         headerMode: 'none'
     }
 );
