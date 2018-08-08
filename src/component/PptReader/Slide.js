@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, Image, StyleSheet} from 'react-native';
+import {Text, View, Image, StyleSheet, Dimensions} from 'react-native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_HEIGHT = Dimensions.get('window').height
 
 class Slide extends React.Component {
     render() {
@@ -13,12 +16,11 @@ class Slide extends React.Component {
     }
 }
 
-
 const styles = StyleSheet.create({
     slide: {
         flex: 1,
-        width: 300,
-        height: 200
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT,
     }
 });
 

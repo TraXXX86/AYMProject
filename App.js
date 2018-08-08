@@ -18,6 +18,12 @@ class AuthentificationScreen extends React.Component {
 
 class HomeScreen extends React.Component {
     render() {
+        const { navigation } = this.props;
+        const server_url = navigation.getParam('server_url');
+        const meeting_id = navigation.getParam('meeting_id');
+        const user_name = navigation.getParam('user_name');
+        const user_profil = navigation.getParam('user_profil');
+
         return (
             <View style={{flex: 1}}>
                 <Header
@@ -43,11 +49,11 @@ class HomeScreen extends React.Component {
                         />
                     }
                 />
-                <AYM server=""
-                     meeting_id="1AF"
-                     user_id="Prof"
-                     user_name="Prof"
-                     user_profil="teacher"/>
+                <AYM server={server_url}
+                     meeting_id={meeting_id}
+                     user_id={user_name}
+                     user_name={user_name}
+                     user_profil={user_profil}/>
             </View>
         );
     }
