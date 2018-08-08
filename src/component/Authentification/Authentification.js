@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, Text, View, KeyboardAvoidingView, Dimensions, StyleSheet, ScrollView} from 'react-native';
-import {Header, Button, FormLabel, FormInput, FormValidationMessage} from 'react-native-elements'
+import {Header, Button, FormLabel, FormInput, FormValidationMessage, Icon} from 'react-native-elements'
 import {withNavigation} from 'react-navigation';
 
 class Authentification extends Component {
@@ -36,6 +36,16 @@ class Authentification extends Component {
                 <View style={{flex: 1}}>
                     <Header
                         centerComponent={{text: 'Authentification', style: {color: '#fff'}}}
+                        rightComponent={
+                            <Icon
+                                name='question-circle'
+                                type='font-awesome'
+                                color='#fff'
+                                onPress={() => {
+                                    this.props.navigation.navigate('Help');
+                                }}
+                            />
+                        }
                     />
                     <View style={{flex: 1, padding: 10}}>
                         <FormLabel>Server :</FormLabel>

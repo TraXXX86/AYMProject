@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
 import PptReader from '../PptReader/PptReader';
-//import Authentification from '../Authentification/Authentification';
 import UserViewer from '../UserViewer/UserViewer';
-
+import {withNavigation} from 'react-navigation';
 
 class AYM extends Component {
 
@@ -161,8 +160,6 @@ class AYM extends Component {
                     {this.state.error ? <View style={{flex: 1, backgroundColor: 'red'}}>
                         <Text>Error : {this.state.error}</Text>
                     </View> : ''}
-                    <View style={{flex: 1, backgroundColor: 'skyblue'}}><Text>Current User Name
-                        : {this.state.current_user_name}</Text></View>
                     <View style={{flex: 18}}>
                         <PptReader wsclient={this.ws_client}
                                    meeting_id={this.state.meeting.id}
@@ -173,7 +170,7 @@ class AYM extends Component {
                                    previous_slide={this.state.previous_slide}
                                    read_only={this.state.read_only}/>
                     </View>
-                    <View style={{flex: 14}}>
+                    <View style={{flex: 13}}>
                         <UserViewer users={this.state.users}/>
                     </View>
                 </View>
@@ -188,4 +185,4 @@ class AYM extends Component {
     }
 }
 
-export default AYM;
+export default withNavigation(AYM);

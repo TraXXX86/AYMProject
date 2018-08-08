@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import {Image, Text, View, FlatList, ScrollView} from 'react-native';
 import {Avatar, List, ListItem} from 'react-native-elements'
+import {withNavigation} from 'react-navigation';
 
 class UserViewer extends Component {
 
     constructor(props) {
         super(props);
+        this.navigation = this.props.navigation;
+    }
+
+    goToUserDetails(user) {
+        //Alert.alert('🎸', 'You rock ')
+        this.navigation.navigate('User', {
+            'user': user,
+        })
     }
 
     render() {
@@ -17,8 +26,8 @@ class UserViewer extends Component {
 
         try {
             return (
-                <ScrollView style={{flex: 1}}>
-                    <List style={{flex: 1}}>
+                <ScrollView>
+                    <List>
                         {users.map((user) => {
                                 if (user.name != 'Psio') {
                                     return <ListItem
@@ -34,6 +43,7 @@ class UserViewer extends Component {
                                         }
                                         key={user.id}
                                         title={user.name}
+                                        onPressRightIcon={() => this.goToUserDetails(user)}
                                     />
                                 }
                             }
@@ -53,4 +63,4 @@ class UserViewer extends Component {
     }
 }
 
-export default UserViewer;
+export default withNavigation(UserViewer);

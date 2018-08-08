@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements'
 
 class NavigationBtn extends Component {
@@ -17,6 +17,7 @@ class NavigationBtn extends Component {
             return (
                 <View style={{flex: 1}}>
                     <Button
+                        buttonStyle={styles.navigationButton}
                         rightIcon={{name: 'angle-right', type: 'font-awesome'}}
                         onPress={() => this.state.onClick()}/>
                 </View>
@@ -25,6 +26,7 @@ class NavigationBtn extends Component {
         return (
             <View style={{flex: 1}}>
                 <Button
+                    buttonStyle={styles.navigationButton}
                     leftIcon={{name: 'angle-left', type: 'font-awesome'}}
                     onPress={() => this.state.onClick()}/>
             </View>
@@ -33,3 +35,10 @@ class NavigationBtn extends Component {
 }
 
 export default NavigationBtn;
+
+const styles = StyleSheet.create({
+    navigationButton: {
+        backgroundColor: '#3D6DCC',
+        borderRadius: 50,
+    },
+})
