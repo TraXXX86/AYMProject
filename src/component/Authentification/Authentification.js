@@ -19,9 +19,6 @@ class AuthentificationScreen extends Component {
      * Open AYM application when user is connected
      */
     submitForm() {
-        //Alert.alert('🎸', 'You rock ')
-
-        console.log(this.state);
         this.navigation.navigate('Home', {
             'server_url': this.state.server_url,
             'meeting_id': this.state.meeting_id,
@@ -35,7 +32,7 @@ class AuthentificationScreen extends Component {
             <ScrollView>
                 <View style={{flex: 1}}>
                     <Header
-                        centerComponent={{text: 'Authentification', style: {color: '#fff'}}}
+                        centerComponent={{text: 'Authentication', style: {color: '#fff'}}}
                         rightComponent={
                             <Icon
                                 name='question-circle'
@@ -79,7 +76,7 @@ class AuthentificationScreen extends Component {
                     </View>
                     <View style={{padding: 15}}>
                         <Button
-                            title="Se connecter"
+                            title="Sign in"
                             buttonStyle={styles.signUpButton}
                             linearGradientProps={{
                                 colors: ['#FF9800', '#F44336'],

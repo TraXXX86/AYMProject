@@ -156,16 +156,42 @@ class AYM extends Component {
         return result;
     }
 
+    get style() {
+        return ResponsiveStyleSheet.select([{
+            query: {orientation: "landscape"},
+            style: {
+                slide: {
+                    flex: 1,
+                    width: SCREEN_WIDTH,
+                    height: SCREEN_HEIGHT,
+                }
+            }
+        }, {
+            query: {orientation: "portrait"},
+            style: {
+                slide: {
+                    flex: 1,
+                    width: SCREEN_WIDTH,
+                    height: 200,
+                }
+            }
+        }]);
+    }
+
     render() {
         const {width, height} = this.props.window;
         const mode = height > width ? "portrait" : "landscape";
 
         if (this.state.meeting != null && this.state.slide != null) {
+            let styleToUse = styles.ppt_reader;
+            if (this.state.read_only) {
+                styleToUse = styles.ppt_reader_read_only;
+            }
             return (
                 <View style={{flex: 1}}>
                     <HeaderAYM mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
                     <WarningMessage error={this.state.error}/>
-                    <View style={{flex: 18}}>
+                    <View style={styleToUse}>
                         <PptReader wsclient={this.ws_client}
                                    meeting_id={this.state.meeting.id}
                                    slide_title={this.state.slide.title}
@@ -249,5 +275,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         padding: 10
+    },
+    ppt_reader_read_only: {
+        flex: 12
+    },
+    ppt_reader: {
+        flex: 18
     }
 })

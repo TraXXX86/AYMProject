@@ -8,23 +8,9 @@ import {ResponsiveComponent, ResponsiveStyleSheet} from "react-native-responsive
 @responsive
 class Slide extends ResponsiveComponent  {
 
-    state = {
-        modalVisible: false,
-    };
-
-    setModalVisible(visible) {
-        this.setState({modalVisible: visible});
-    }
-
-    test() {
-        Alert.alert('🎸', 'You rock ')
-    }
-
     get style() {
-        let SCREEN_WIDTH = Dimensions.get('window').width
-        let SCREEN_HEIGHT = Dimensions.get('window').height
-        console.log('SCREEN_WIDTH : ' + SCREEN_WIDTH)
-        console.log('SCREEN_HEIGHT : ' + SCREEN_HEIGHT)
+        let SCREEN_WIDTH = Dimensions.get('window').width;
+        let SCREEN_HEIGHT = Dimensions.get('window').height;
         return ResponsiveStyleSheet.select([{
             query: { orientation: "landscape" },
             style: {
@@ -50,14 +36,10 @@ class Slide extends ResponsiveComponent  {
         const {width, height} = this.props.window;
         const mode = height > width ? "portrait" : "landscape";
         const {style} = this;
-
-        console.log('style : ' + style.slide)
-
         return (
             <View style={{flex: 1}}>
                 <TouchableHighlight onPress={() => {
-                    //this.setModalVisible(true);
-                    this.test();
+                    Alert.alert('🎸', 'You rock ');
                 }}>
                     <ImageBackground source={{uri: this.props.image}} style={style.slide}>
                     </ImageBackground>
