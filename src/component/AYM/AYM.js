@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, ActivityIndicator, StyleSheet} from 'react-native';
+
 import PptReader from '../PptReader/PptReader';
 import UserViewer from '../UserViewer/UserViewer';
 import {withNavigation} from 'react-navigation';
@@ -177,12 +178,24 @@ class AYM extends Component {
             );
         } else {
             return (
-                <Text>
-                    Not connected
-                </Text>
+                <View style={[styles.container, styles.horizontal]}>
+                    <ActivityIndicator size="large" color="#0000ff"/>
+                </View>
             );
         }
     }
 }
 
 export default withNavigation(AYM);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    horizontal: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+    }
+})

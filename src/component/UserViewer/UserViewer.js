@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, Text, View, FlatList, ScrollView} from 'react-native';
+import {Image, Text, View, FlatList, ScrollView, ActivityIndicator, StyleSheet} from 'react-native';
 import {Avatar, List, ListItem} from 'react-native-elements'
 import {withNavigation} from 'react-navigation';
 
@@ -53,9 +53,9 @@ class UserViewer extends Component {
             )
         } catch (error) {
             return (
-                <Text style={{flex: 1}}>
-                    Error : {error.toString()}
-                </Text>
+                <View style={[styles.container, styles.horizontal]}>
+                    <ActivityIndicator size="large" color="#0000ff"/>
+                </View>
             );
         }
 
@@ -64,3 +64,15 @@ class UserViewer extends Component {
 }
 
 export default withNavigation(UserViewer);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    horizontal: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10
+    }
+})

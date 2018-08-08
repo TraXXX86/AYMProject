@@ -9,7 +9,6 @@ class Slide extends React.Component {
         return (
             <View style={{flex: 1}}>
                 <ImageBackground source={{uri: this.props.image}} style={styles.slide}>
-                    <Text>Inside</Text>
                 </ImageBackground>
             </View>
         )
