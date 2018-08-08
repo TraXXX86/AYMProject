@@ -54,7 +54,8 @@ class HomeScreen extends React.Component {
                          meeting_id={meeting_id}
                          user_id={user_name}
                          user_name={user_name}
-                         user_profil={user_profil}/>
+                         user_profil={user_profil}
+                    />
                 </View>
             </View>
         );

@@ -6,17 +6,7 @@ import {createStackNavigator} from 'react-navigation';
 import UserScreen from './src/component/UserViewer/UserScreen';
 import HomeScreen from './src/component/AYM/HomeScreen';
 import HelpScreen from './src/component/AYM/HelpScreen';
-import Authentification from './src/component/Authentification/Authentification';
-
-class AuthentificationScreen extends React.Component {
-    render() {
-        return (
-            <View style={{flex: 1}}>
-                <Authentification />
-            </View>
-        );
-    }
-}
+import AuthentificationScreen from './src/component/Authentification/Authentification';
 
 const RootStack = createStackNavigator(
     {

@@ -3,7 +3,7 @@ import {Alert, Text, View, KeyboardAvoidingView, Dimensions, StyleSheet, ScrollV
 import {Header, Button, FormLabel, FormInput, FormValidationMessage, Icon} from 'react-native-elements'
 import {withNavigation} from 'react-navigation';
 
-class Authentification extends Component {
+class AuthentificationScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -97,7 +97,7 @@ class Authentification extends Component {
     }
 }
 
-export default withNavigation(Authentification);
+export default withNavigation(AuthentificationScreen);
 
 const styles = StyleSheet.create({
     signUpButtonText: {

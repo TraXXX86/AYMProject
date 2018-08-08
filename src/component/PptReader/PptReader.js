@@ -32,12 +32,12 @@ class PptReader extends Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
+                    <View style={{flex: 20}}>
+                        <Slide image={this.props.image}/>
+                    </View>
                     <View style={{flex: 6}}>
                         <Text>{this.props.title}</Text>
                         <Text>{this.props.slide_title}</Text>
-                    </View>
-                    <View style={{flex: 20}}>
-                        <Slide image={this.props.image}/>
                     </View>
                     {!this.state.read_only ?
                         <View style={{flex: 6, flexDirection: 'row', marginTop: 10}}>

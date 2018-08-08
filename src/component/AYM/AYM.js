@@ -15,9 +15,7 @@ class AYM extends Component {
 
         // Create function to use binding this
         function doWsInit(event) {
-
             console.log('REQUEST_JOIN for user : ' + props.user_id);
-
             ws_client.send('{ "meeting": {"id": "' + this.props.meeting_id + '"}, "event": "REQUEST_JOIN", "user": {"id": "' + props.user_id + '","type": "' + props.user_profil + '","name": "' + props.user_name + '","avatar": "https://...."}}');
         }
 
@@ -30,6 +28,7 @@ class AYM extends Component {
         }
 
         ws_client.onmessage = doWsCall.bind(this);
+
         this.ws_client = ws_client;
         this.state = {
             slide: {
