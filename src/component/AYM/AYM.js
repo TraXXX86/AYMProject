@@ -166,14 +166,14 @@ class AYM extends Component {
                     <View style={{flex: 18}}>
                         <PptReader wsclient={this.ws_client}
                                    meeting_id={this.state.meeting.id}
-                                   title={this.state.meeting.title}
+                                   title={this.state.meeting.titre}
                                    slide_title={this.state.slide.title}
                                    image={this.state.image}
                                    next_slide={this.state.next_slide}
                                    previous_slide={this.state.previous_slide}
                                    read_only={this.state.read_only}/>
                     </View>
-                    <View style={{flex: 8}}>
+                    <View style={{flex: 14}}>
                         <UserViewer users={this.state.users}/>
                     </View>
                 </View>

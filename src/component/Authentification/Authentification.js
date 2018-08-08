@@ -22,7 +22,6 @@ class Authentification extends Component {
         //Alert.alert('🎸', 'You rock ')
 
         console.log(this.state);
-
         this.navigation.navigate('Home', {
             'server_url': this.state.server_url,
             'meeting_id': this.state.meeting_id,
