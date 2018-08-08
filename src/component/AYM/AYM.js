@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, ActivityIndicator, StyleSheet} from 'react-native';
+import {Header, Icon} from 'react-native-elements';
 
 import PptReader from '../PptReader/PptReader';
 import UserViewer from '../UserViewer/UserViewer';
@@ -162,13 +163,11 @@ class AYM extends Component {
         if (this.state.meeting != null && this.state.slide != null) {
             return (
                 <View style={{flex: 1}}>
-                    {this.state.error ? <View style={{flex: 1, backgroundColor: 'red'}}>
-                        <Text>Error : {this.state.error}</Text>
-                    </View> : ''}
+                    <HeaderAYM mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
+                    <WarningMessage error={this.state.error}/>
                     <View style={{flex: 18}}>
                         <PptReader wsclient={this.ws_client}
                                    meeting_id={this.state.meeting.id}
-                                   title={this.state.meeting.titre}
                                    slide_title={this.state.slide.title}
                                    image={this.state.image}
                                    next_slide={this.state.next_slide}
@@ -182,11 +181,60 @@ class AYM extends Component {
             );
         } else {
             return (
-                <View style={[styles.container, styles.horizontal]}>
-                    <ActivityIndicator size="large" color="#0000ff"/>
+                <View style={{flex: 1}}>
+                    <HeaderAYM mode={mode} navigation={this.props.navigation}/>
+                    <View style={[styles.container, styles.horizontal]}>
+                        <ActivityIndicator size="large" color="#0000ff"/>
+                    </View>
                 </View>
             );
         }
+    }
+}
+
+function HeaderAYM(props) {
+    if (props.mode !== 'landscape') {
+        return (
+            <View>
+                <Header
+                    leftComponent={
+                        <Icon
+                            name='sign-out'
+                            type='font-awesome'
+                            color='#fff'
+                            onPress={() => {
+                                props.navigation.navigate('Authentification');
+                            }}
+                        />
+                    }
+                    centerComponent={{text: props.title ? props.title : 'AYM', style: {color: '#fff'}}}
+                    rightComponent={
+                        <Icon
+                            name='question-circle'
+                            type='font-awesome'
+                            color='#fff'
+                            onPress={() => {
+                                props.navigation.navigate('Help');
+                            }}
+                        />
+                    }
+                />
+            </View>)
+    } else {
+        return (<View style={{flex: 2, backgroundColor: '#3D6DCC'}}>
+        </View>);
+    }
+}
+
+function WarningMessage(props) {
+    if (props.error) {
+        return (
+            <View style={{flex: 1, backgroundColor: 'red'}}>
+                <Text>Error : {props.error}</Text>
+            </View>
+        );
+    } else {
+        return '';
     }
 }
 
