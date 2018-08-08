@@ -12,20 +12,11 @@ class NavigationBtn extends Component {
         };
     }
 
-    getNavigationText(isNext) {
-        if (isNext) {
-            return "Next";
-        } else {
-            return "Previous";
-        }
-    }
-
     render() {
         if (this.state.isNext) {
             return (
                 <View style={{flex: 1}}>
                     <Button
-                        large
                         rightIcon={{name: 'angle-right', type: 'font-awesome'}}
                         onPress={() => this.state.onClick()}/>
                 </View>
@@ -34,7 +25,6 @@ class NavigationBtn extends Component {
         return (
             <View style={{flex: 1}}>
                 <Button
-                    large
                     leftIcon={{name: 'angle-left', type: 'font-awesome'}}
                     onPress={() => this.state.onClick()}/>
             </View>

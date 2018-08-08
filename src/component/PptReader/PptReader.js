@@ -24,7 +24,6 @@ class PptReader extends Component {
 
     render() {
         console.log('Slide to show : ' + this.props.image);
-        //console.log('read_only' + this.state.read_only);
         return (
             <View style={{
                 flex: 1,
@@ -34,18 +33,20 @@ class PptReader extends Component {
                 alignItems: 'center',
             }}>
                 <View style={{flex: 1, backgroundColor: 'steelblue'}}>
-                    <Text id="message">{this.props.title}</Text>
-                </View>
-                <View style={{flex: 20, backgroundColor: 'steelblue'}}>
-                    {!this.state.read_only ?
-                        <NavigationBtn onClick={() => this.goToSlide(this.props.previous_slide)}/> : ''}
-                    <Slide image={this.props.image}/>
-                    {!this.state.read_only ?
-                        <NavigationBtn isNext="true" onClick={() => this.goToSlide(this.props.next_slide)}/> : ''}
+                    <Text>{this.props.title}</Text>
                 </View>
                 <View style={{flex: 1, backgroundColor: 'steelblue'}}>
                     <Text>{this.props.slide_title}</Text>
                 </View>
+                <View style={{flex: 20, backgroundColor: 'steelblue'}}>
+                    <Slide image={this.props.image}/>
+                </View>
+                {!this.state.read_only ?
+                    <View style={{flex: 4, flexDirection: 'row', backgroundColor: 'steelblue'}}>
+                        <NavigationBtn onClick={() => this.goToSlide(this.props.previous_slide)}/>
+                        <NavigationBtn isNext="true" onClick={() => this.goToSlide(this.props.next_slide)}/>
+                    </View> : ''}
+
             </View>
         );
     }
