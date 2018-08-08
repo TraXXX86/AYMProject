@@ -30,7 +30,6 @@ class UserScreen extends React.Component {
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <Text h4>Id: {user.id}</Text>
                     <Text h4>Username: {user.name}</Text>
-                    <Text h4>Login: {user.login}</Text>
                     <Text h4>Profil: {user.type}</Text>
                 </View>
             </View>
