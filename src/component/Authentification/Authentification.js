@@ -9,8 +9,8 @@ class Authentification extends Component {
         this.state = {
             user_name: 'Prof',
             user_profil: 'teacher',
-            server_url: 'wss://aym.arbey.fr/ws',
-            meeting_id: '1AF',
+            server_url: '',
+            meeting_id: '',
         };
         this.navigation = this.props.navigation;
     }
