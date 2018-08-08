@@ -9,8 +9,8 @@ class Authentification extends Component {
         this.state = {
             user_name: 'Prof',
             user_profil: 'teacher',
-            server_url: '',
-            meeting_id: '',
+            server_url: 'wss://aym.arbey.fr/ws',
+            meeting_id: '1AF',
         };
         this.navigation = this.props.navigation;
     }
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
     },
     signUpButton: {
+        backgroundColor: "#3D6DCC",
         borderRadius: 50,
         height: 45,
     },

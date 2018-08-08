@@ -4,7 +4,9 @@ import {Text, View, ActivityIndicator, StyleSheet} from 'react-native';
 import PptReader from '../PptReader/PptReader';
 import UserViewer from '../UserViewer/UserViewer';
 import {withNavigation} from 'react-navigation';
+import {responsive} from "react-native-responsive-ui";
 
+@responsive
 class AYM extends Component {
 
     constructor(props) {
@@ -155,6 +157,9 @@ class AYM extends Component {
     }
 
     render() {
+        const {width, height} = this.props.window;
+        const mode = height > width ? "portrait" : "landscape";
+
         if (this.state.meeting != null && this.state.slide != null) {
             return (
                 <View style={{flex: 1}}>
@@ -171,9 +176,9 @@ class AYM extends Component {
                                    previous_slide={this.state.previous_slide}
                                    read_only={this.state.read_only}/>
                     </View>
-                    <View style={{flex: 13}}>
+                    {mode !== 'landscape' ? <View style={{flex: 13}}>
                         <UserViewer users={this.state.users}/>
-                    </View>
+                    </View> : '' }
                 </View>
             );
         } else {
