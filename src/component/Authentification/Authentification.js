@@ -3,11 +3,13 @@ import {Alert, Text, View, KeyboardAvoidingView, Dimensions, StyleSheet, ScrollV
 import {Header, Button, FormLabel, FormInput, FormValidationMessage, Icon} from 'react-native-elements'
 import {withNavigation} from 'react-navigation';
 
+import AYMButton from '../AYMButton';
+
 class AuthentificationScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user_name: 'Prof',
+            user_name: 'Clara',
             user_profil: 'teacher',
             server_url: '',
             meeting_id: '',
@@ -32,12 +34,14 @@ class AuthentificationScreen extends Component {
             <ScrollView>
                 <View style={{flex: 1}}>
                     <Header
-                        centerComponent={{text: 'Authentication', style: {color: '#fff'}}}
+                        outerContainerStyles={{paddingBottom: 8}}
+                        centerComponent={{text: 'Authentication', style: {color: '#fff', paddingBottom: 8}}}
                         rightComponent={
                             <Icon
                                 name='question-circle'
                                 type='font-awesome'
                                 color='#fff'
+                                size={30}
                                 onPress={() => {
                                     this.props.navigation.navigate('Help');
                                 }}
@@ -75,15 +79,8 @@ class AuthentificationScreen extends Component {
                         />
                     </View>
                     <View style={{padding: 15}}>
-                        <Button
+                        <AYMButton
                             title="Sign in"
-                            buttonStyle={styles.signUpButton}
-                            linearGradientProps={{
-                                colors: ['#FF9800', '#F44336'],
-                                start: [1, 0],
-                                end: [0.2, 0],
-                            }}
-                            titleStyle={styles.signUpButtonText}
                             icon={{name: 'sign-in', type: 'font-awesome'}}
                             onPress={() => this.submitForm()}
                         />
@@ -95,15 +92,3 @@ class AuthentificationScreen extends Component {
 }
 
 export default withNavigation(AuthentificationScreen);
-
-const styles = StyleSheet.create({
-    signUpButtonText: {
-        fontFamily: 'bold',
-        fontSize: 13,
-    },
-    signUpButton: {
-        backgroundColor: "#3D6DCC",
-        borderRadius: 50,
-        height: 45,
-    },
-})

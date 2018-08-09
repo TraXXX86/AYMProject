@@ -223,22 +223,25 @@ function HeaderAYM(props) {
         return (
             <View>
                 <Header
+                    outerContainerStyles={{paddingBottom: 8}}
                     leftComponent={
                         <Icon
                             name='sign-out'
                             type='font-awesome'
                             color='#fff'
+                            size={30}
                             onPress={() => {
                                 props.navigation.navigate('Authentification');
                             }}
                         />
                     }
-                    centerComponent={{text: props.title ? props.title : 'AYM', style: {color: '#fff'}}}
+                    centerComponent={{text: props.title ? props.title : 'AYM', style: {color: '#fff', paddingBottom: 8}}}
                     rightComponent={
                         <Icon
                             name='question-circle'
                             type='font-awesome'
                             color='#fff'
+                            size={30}
                             onPress={() => {
                                 props.navigation.navigate('Help');
                             }}

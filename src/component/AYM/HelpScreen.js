@@ -3,17 +3,24 @@ import {StyleSheet, Text, View, Modal, Alert, TouchableHighlight, ScrollView, Bu
 import {Header, Icon, Avatar} from 'react-native-elements';
 import {withNavigation} from 'react-navigation';
 
+import AYMButton from '../AYMButton';
+
 class HelpScreen extends React.Component {
     render() {
         return (
             <View style={{flex: 1}}>
                 <Header
-                    centerComponent={{text: 'Help', style: {color: '#fff'}}}
+                    outerContainerStyles={{paddingBottom: 8}}
+                    centerComponent={{
+                        text: 'Help',
+                        style: {color: '#fff', paddingBottom: 8}
+                    }}
                     leftComponent={
                         <Icon
                             name='arrow-circle-o-left'
                             type='font-awesome'
                             color='#fff'
+                            size={30}
                             onPress={() => {
                                 this.props.navigation.goBack();
                             }}
@@ -63,14 +70,20 @@ class HelpScreen extends React.Component {
                         hendrerit diam facilisis in. Maecenas et erat eget orci euismod semper at eu mi.
                     </Text>
                     <View style={{flex: 4, flexDirection: 'row', marginTop: 20, marginBottom: 20}}>
-                        <Button
-                            title="Rating"
-                            onPress={() => this.props.navigation.navigate('Ratings')}
-                        />
-                        <Button
-                            title="Go back"
-                            onPress={() => this.props.navigation.goBack()}
-                        />
+                        <View style={{flex: 1}}>
+                            <AYMButton
+                                title="Go back"
+                                icon={{name: 'arrow-circle-o-left', type: 'font-awesome'}}
+                                onPress={() => this.props.navigation.goBack()}
+                            />
+                        </View>
+                        <View style={{flex: 1}}>
+                            <AYMButton
+                                title="Rating"
+                                icon={{name: 'star', type: 'font-awesome'}}
+                                onPress={() => this.props.navigation.navigate('Ratings')}
+                            />
+                        </View>
                     </View>
                 </ScrollView>
             </View>

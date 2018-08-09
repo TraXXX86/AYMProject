@@ -12,12 +12,14 @@ class UserScreen extends React.Component {
         return (
             <View style={{flex: 1}}>
                 <Header
-                    centerComponent={{text: 'User details', style: {color: '#fff'}}}
+                    outerContainerStyles={{paddingBottom: 8}}
+                    centerComponent={{text: 'User details', style: {color: '#fff', paddingBottom: 8}}}
                     leftComponent={
                         <Icon
                             name='arrow-circle-o-left'
                             type='font-awesome'
                             color='#fff'
+                            size={30}
                             onPress={() => {
                                 this.props.navigation.goBack();
                             }}
