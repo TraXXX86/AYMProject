@@ -43,7 +43,8 @@ class PptReader extends Component {
                         <View style={{flex: 6, flexDirection: 'row', marginTop: 10}}>
                             <NavigationBtn onClick={() => this.goToSlide(this.props.previous_slide)}/>
                             <NavigationBtn isNext="true" onClick={() => this.goToSlide(this.props.next_slide)}/>
-                        </View> : ''}
+                        </View> : ''
+                    }
                 </View>
             </ScrollView>
         );

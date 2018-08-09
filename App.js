@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
-import {Header, Icon} from 'react-native-elements';
 import {createStackNavigator} from 'react-navigation';
 
 import UserScreen from './src/component/UserViewer/UserScreen';
 import HomeScreen from './src/component/AYM/HomeScreen';
 import HelpScreen from './src/component/AYM/HelpScreen';
+import RatingScreen from './src/component/AYM/RatingScreen';
 import AuthentificationScreen from './src/component/Authentification/Authentification';
 
 const RootStack = createStackNavigator(
@@ -29,10 +29,11 @@ const RootStack = createStackNavigator(
             },
         },
         Help: HelpScreen,
+        Ratings: RatingScreen,
     },
     {
         initialRouteName: 'Authentification',
-        headerMode: 'none'
+        headerMode: 'none',
     }
 );
 
