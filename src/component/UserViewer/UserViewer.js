@@ -23,11 +23,19 @@ class UserViewer extends Component {
          source={{ uri: user.avatar}}
          defaultSource={require('../../../resources/img/avatar.jpg')} />*/
         //let avatarToUse = '../../../resources/img/avatar.png';
+
+        const orderedUsers = [].concat(users).sort(function (a, b) {
+            var nameA = a.name.toLowerCase().normalize('NFD'), nameB = b.name.toLowerCase().normalize('NFD');
+            if (nameA < nameB) return -1;
+            if (nameA > nameB) return 1;
+            return 0;
+        });
+
         try {
             return (
                 <ScrollView>
                     <List>
-                        {users.map((user) => {
+                        {orderedUsers.map((user) => {
                                 if (user.name != '' && user.name != 'Psio') {
                                     return <ListItem
                                         roundAvatar
