@@ -11,7 +11,7 @@ class HelpScreen extends React.Component {
                     centerComponent={{text: 'Help', style: {color: '#fff'}}}
                     leftComponent={
                         <Icon
-                            name='angle-left'
+                            name='arrow-circle-o-left'
                             type='font-awesome'
                             color='#fff'
                             onPress={() => {

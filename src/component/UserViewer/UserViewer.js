@@ -19,31 +19,22 @@ class UserViewer extends Component {
 
     render() {
         const users = this.props.users;
-
         /*<Image
          source={{ uri: user.avatar}}
          defaultSource={require('../../../resources/img/avatar.jpg')} />*/
-
+        //let avatarToUse = '../../../resources/img/avatar.png';
         try {
             return (
                 <ScrollView>
                     <List>
                         {users.map((user) => {
-                                if (user.name != 'Psio') {
+                                if (user.name != '' && user.name != 'Psio') {
                                     return <ListItem
                                         roundAvatar
-                                        avatar={<Avatar
-                                            small
-                                            rounded
-                                            //source={{uri: user.avatar}}
-                                            icon={{name: 'user', type: 'font-awesome'}}
-                                            onPress={() => console.log("Works!")}
-                                            activeOpacity={0.7}
-                                        />
-                                        }
+                                        avatar={<AvatarAYM avatar={user.avatar}/>}
                                         key={user.id}
                                         title={user.name}
-                                        onPressRightIcon={() => this.goToUserDetails(user)}
+                                        onPress={() => this.goToUserDetails(user)}
                                     />
                                 }
                             }
@@ -58,9 +49,26 @@ class UserViewer extends Component {
                 </View>
             );
         }
-
-
     }
+}
+
+function AvatarAYM(props) {
+    if (props.avatar === null || props.avatar === '' || props.avatar === 'https://....') {
+        return (<Avatar
+            small
+            rounded
+            icon={{name: 'user', type: 'font-awesome'}}
+            onPress={() => console.log("Works!")}
+            activeOpacity={0.7}
+        />);
+    }
+    return (<Avatar
+        small
+        rounded
+        source={{uri: props.avatar}}
+        onPress={() => console.log("Works!")}
+        activeOpacity={0.7}
+    />);
 }
 
 export default withNavigation(UserViewer);
