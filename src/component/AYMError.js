@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Avatar} from 'react-native-elements';
+import {View, StyleSheet} from 'react-native';
+import {Text, Avatar} from 'react-native-elements';
 import AYMHeader from './AYMHeader';
+import AYMButton from './AYMButton';
 
 class AYMError extends React.Component {
     render() {

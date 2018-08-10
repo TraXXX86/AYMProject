@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, ActivityIndicator, StyleSheet, ScrollView} from 'react-native';
 import {Header, Icon, Text, Avatar} from 'react-native-elements';
 
 import PptReader from '../PptReader/PptReader';
@@ -203,15 +203,16 @@ class AYM extends Component {
                         <AYMHeader mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
                         <WarningMessage error={this.state.error}/>
                         <View style={styleToUse}>
-                            <PptReader slide_title={this.state.slide.title}
-                                       image={this.state.image}/>
-                            {!this.state.read_only ? <NavigationPanel
-                                wsclient={this.ws_client}
-                                meeting_id={this.state.meeting.id}
-                                next_slide={this.state.next_slide}
-                                previous_slide={this.state.previous_slide}
-
-                            /> : ''}
+                            <ScrollView>
+                                <PptReader slide_title={this.state.slide.title}
+                                           image={this.state.image}/>
+                                {!this.state.read_only ? <NavigationPanel
+                                    wsclient={this.ws_client}
+                                    meeting_id={this.state.meeting.id}
+                                    next_slide={this.state.next_slide}
+                                    previous_slide={this.state.previous_slide}
+                                /> : ''}
+                            </ScrollView>
                         </View>
                         {mode !== 'landscape' ? <View style={{flex: 13}}>
                             <UserViewer users={this.state.users}/>

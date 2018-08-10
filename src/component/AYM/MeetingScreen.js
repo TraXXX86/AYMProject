@@ -1,11 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import {withNavigation} from 'react-navigation';
-import {responsive} from "react-native-responsive-ui";
 
 import AYM from './AYM';
 
-@responsive
 class MeetingScreen extends React.Component {
     render() {
         const {navigation} = this.props;

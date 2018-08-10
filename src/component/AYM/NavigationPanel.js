@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Text, View, Image, ScrollView} from 'react-native';
-
+import {responsive} from "react-native-responsive-ui";
 import AYMButton from '../AYMButton';
 
+@responsive
 class NavigationPanel extends Component {
 
     constructor(props) {
@@ -10,7 +11,6 @@ class NavigationPanel extends Component {
         this.state = {
             meeting_id: props.meeting_id,
             ws_client: props.wsclient,
-            read_only: props.read_only,
         };
     }
 
@@ -25,6 +25,9 @@ class NavigationPanel extends Component {
     }
 
     render() {
+        const {width, height} = this.props.window;
+        const mode = height > width ? "portrait" : "landscape";
+
         return (
             <ScrollView>
                 <View style={{
@@ -40,12 +43,12 @@ class NavigationPanel extends Component {
                                 onPress={() => this.goToSlide(this.props.previous_slide)}
                             />
                         </View>
-                        <View style={{flex: 2}}>
+                        {mode !== 'landscape' ? <View style={{flex: 2}}>
                             <AYMButton
                                 icon={{name: 'plus-circle', type: 'font-awesome'}}
                                 title="Add Quiz"
                             />
-                        </View>
+                        </View> : ''}
                         <View style={{flex: 1}}>
                             <AYMButton
                                 rightIcon={{name: 'angle-right', type: 'font-awesome'}}

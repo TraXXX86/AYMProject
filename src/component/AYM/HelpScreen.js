@@ -36,22 +36,8 @@ class HelpScreen extends React.Component {
                         elementum volutpat. Nam euismod libero et ultrices placerat. Sed hendrerit egestas mattis.
                         Fusce velit purus, egestas quis varius id, dignissim vel tellus. Donec semper commodo augue,
                         dignissim venenatis tortor posuere ac. Quisque consequat odio at convallis vulputate.
-
-                        Suspendisse eu eleifend orci, tincidunt bibendum urna. Donec elementum vehicula quam
-                        pellentesque maximus. Praesent suscipit malesuada faucibus. Aliquam erat ipsum, fermentum ut
-                        augue a, volutpat dictum erat. Sed sollicitudin felis vel ante tempor aliquet. Pellentesque
-                        in mollis urna. Ut varius leo condimentum odio pretium varius. Donec tempor ornare urna, vel
-                        hendrerit diam facilisis in. Maecenas et erat eget orci euismod semper at eu mi.
                     </Text>
                     <Text>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet bibendum nulla, nec
-                        iaculis enim. Donec laoreet efficitur ante vitae venenatis. Sed semper sollicitudin euismod.
-                        Morbi congue sapien sed sapien eleifend, in consequat metus vehicula. Nulla facilisi. Proin
-                        in consequat metus. In facilisis bibendum enim id gravida. Phasellus eleifend leo et mi
-                        elementum volutpat. Nam euismod libero et ultrices placerat. Sed hendrerit egestas mattis.
-                        Fusce velit purus, egestas quis varius id, dignissim vel tellus. Donec semper commodo augue,
-                        dignissim venenatis tortor posuere ac. Quisque consequat odio at convallis vulputate.
-
                         Suspendisse eu eleifend orci, tincidunt bibendum urna. Donec elementum vehicula quam
                         pellentesque maximus. Praesent suscipit malesuada faucibus. Aliquam erat ipsum, fermentum ut
                         augue a, volutpat dictum erat. Sed sollicitudin felis vel ante tempor aliquet. Pellentesque
