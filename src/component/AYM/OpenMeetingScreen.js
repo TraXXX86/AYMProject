@@ -63,26 +63,30 @@ class OpenMeetingScreen extends React.Component {
                     <Text h3>Join a meeting</Text>
                 </View>
                 <View style={{flex: 2, padding: 10}}>
-                    <FormLabel>Select your meeting room:</FormLabel>
-                    <FormInput
-                        icon="user"
-                        value={this.state.meeting_id}
-                        onChangeText={meeting_id => this.setState({meeting_id})}
-                        placeholder="Meeting Room"
-                    />
-                    <FormLabel>Your Name :</FormLabel>
-                    <FormInput
-                        icon="user"
-                        value={this.state.user_name}
-                        onChangeText={user_name => this.setState({user_name})}
-                        placeholder="User Name"
-                    />
-                    <FormLabel>Your Avatar :</FormLabel>
-                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                        <AYMAvatar
-                            medium={true}
-                            onPress={()=>Alert.alert('Avatar selection is coming soon')}/>
-                    </View>
+                    <ScrollView>
+                        <FormLabel>Select your meeting room:</FormLabel>
+                        <FormInput
+                            value={this.state.meeting_id}
+                            onChangeText={meeting_id => this.setState({meeting_id})}
+                            placeholder="Meeting Room"
+                            onSubmitEditing={() => {
+                                this.user_name.focus();
+                            }}
+                        />
+                        <FormLabel>Your Name :</FormLabel>
+                        <FormInput
+                            value={this.state.user_name}
+                            onChangeText={user_name => this.setState({user_name})}
+                            placeholder="User Name"
+                            ref={ input => this.user_name = input}
+                        />
+                        <FormLabel>Your Avatar :</FormLabel>
+                        <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                            <AYMAvatar
+                                medium={true}
+                                onPress={()=>Alert.alert('Avatar selection is coming soon')}/>
+                        </View>
+                    </ScrollView>
                 </View>
                 <View style={{padding: 15}}>
                     <AYMButton
