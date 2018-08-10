@@ -231,11 +231,11 @@ function HeaderAYM(props) {
                             color='#fff'
                             size={30}
                             onPress={() => {
-                                props.navigation.navigate('Authentification');
+                                props.navigation.navigate('Home');
                             }}
                         />
                     }
-                    centerComponent={{text: props.title ? props.title : 'AYM', style: {color: '#fff', paddingBottom: 8}}}
+                    centerComponent={{text: props.title ? props.title : 'Animate Your Meeting', style: {color: '#fff', paddingBottom: 8}}}
                     rightComponent={
                         <Icon
                             name='question-circle'

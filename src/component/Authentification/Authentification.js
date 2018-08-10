@@ -12,16 +12,17 @@ class AuthentificationScreen extends Component {
             user_name: 'Clara',
             user_profil: 'teacher',
             server_url: '',
-            meeting_id: '',
+            meeting_id: '1AF',
         };
         this.navigation = this.props.navigation;
     }
 
     /**
+     *
      * Open AYM application when user is connected
      */
     submitForm() {
-        this.navigation.navigate('Home', {
+        this.navigation.navigate('Meeting', {
             'server_url': this.state.server_url,
             'meeting_id': this.state.meeting_id,
             'user_name': this.state.user_name,
@@ -35,6 +36,17 @@ class AuthentificationScreen extends Component {
                 <View style={{flex: 1}}>
                     <Header
                         outerContainerStyles={{paddingBottom: 8}}
+                        leftComponent={
+                            <Icon
+                                name='arrow-circle-o-left'
+                                type='font-awesome'
+                                color='#fff'
+                                size={30}
+                                onPress={() => {
+                                    this.props.navigation.goBack();
+                                }}
+                            />
+                        }
                         centerComponent={{text: 'Authentication', style: {color: '#fff', paddingBottom: 8}}}
                         rightComponent={
                             <Icon

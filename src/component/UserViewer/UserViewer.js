@@ -3,6 +3,8 @@ import {Image, Text, View, FlatList, ScrollView, ActivityIndicator, StyleSheet} 
 import {Avatar, List, ListItem} from 'react-native-elements'
 import {withNavigation} from 'react-navigation';
 
+import AYMAvatar from '../AYMAvatar';
+
 class UserViewer extends Component {
 
     constructor(props) {
@@ -11,7 +13,6 @@ class UserViewer extends Component {
     }
 
     goToUserDetails(user) {
-        //Alert.alert('🎸', 'You rock ')
         this.navigation.navigate('User', {
             'user': user,
         })
@@ -19,11 +20,6 @@ class UserViewer extends Component {
 
     render() {
         const users = this.props.users;
-        /*<Image
-         source={{ uri: user.avatar}}
-         defaultSource={require('../../../resources/img/avatar.jpg')} />*/
-        //let avatarToUse = '../../../resources/img/avatar.png';
-
         const orderedUsers = [].concat(users).sort(function (a, b) {
             var nameA = a.name.toLowerCase().normalize('NFD'), nameB = b.name.toLowerCase().normalize('NFD');
             if (nameA < nameB) return -1;
@@ -39,9 +35,10 @@ class UserViewer extends Component {
                                 if (user.name != '' && user.name != 'Psio') {
                                     return <ListItem
                                         roundAvatar
-                                        avatar={<AvatarAYM avatar={user.avatar}/>}
+                                        avatar={<AYMAvatar avatar={user.avatar} small={true}/>}
                                         key={user.id}
                                         title={user.name}
+                                        subtitle={user.type}
                                         onPress={() => this.goToUserDetails(user)}
                                     />
                                 }
@@ -58,25 +55,6 @@ class UserViewer extends Component {
             );
         }
     }
-}
-
-function AvatarAYM(props) {
-    if (props.avatar === null || props.avatar === '' || props.avatar === 'https://....') {
-        return (<Avatar
-            small
-            rounded
-            icon={{name: 'user', type: 'font-awesome'}}
-            onPress={() => console.log("Works!")}
-            activeOpacity={0.7}
-        />);
-    }
-    return (<Avatar
-        small
-        rounded
-        source={{uri: props.avatar}}
-        onPress={() => console.log("Works!")}
-        activeOpacity={0.7}
-    />);
 }
 
 export default withNavigation(UserViewer);

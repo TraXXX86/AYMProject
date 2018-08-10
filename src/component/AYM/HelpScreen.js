@@ -28,18 +28,7 @@ class HelpScreen extends React.Component {
                     }
                 />
                 <ScrollView contentContainerStyle={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Avatar
-                        medium
-                        rounded
-                        overlayContainerStyle={{backgroundColor: '#3D6DCC'}}
-                        icon={{
-                            name: 'question',
-                            type: 'font-awesome',
-                            color: '#fff',
-                        }}
-                        activeOpacity={0.7}
-                    />
-                    <Text>
+                    <Text style={{marginTop: 10}}>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet bibendum nulla, nec
                         iaculis enim. Donec laoreet efficitur ante vitae venenatis. Sed semper sollicitudin euismod.
                         Morbi congue sapien sed sapien eleifend, in consequat metus vehicula. Nulla facilisi. Proin
@@ -82,6 +71,15 @@ class HelpScreen extends React.Component {
                                 title="Rating"
                                 icon={{name: 'star', type: 'font-awesome'}}
                                 onPress={() => this.props.navigation.navigate('Ratings')}
+                            />
+                        </View>
+                    </View>
+                    <View style={{flex: 4, flexDirection: 'row', marginBottom: 20}}>
+                        <View style={{flex: 1}}>
+                            <AYMButton
+                                title="Advanced Authentication"
+                                icon={{name: 'cog', type: 'font-awesome'}}
+                                onPress={() => this.props.navigation.navigate('Authentification')}
                             />
                         </View>
                     </View>

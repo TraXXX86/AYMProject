@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleSheet, View, Button, Image} from 'react-native';
 import {Header, Icon, Avatar, Text, Card} from 'react-native-elements';
 import {withNavigation} from 'react-navigation';
-//import AvatarAYM from './UserViewer';
+
+import AYMAvatar from '../AYMAvatar';
 
 class UserScreen extends React.Component {
     render() {
@@ -32,7 +33,7 @@ class UserScreen extends React.Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <AvatarAYM avatar={user.avatar}/>
+                    <AYMAvatar avatar={user.avatar} xlarge={true} />
                 </View>
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <Text h4>Id: {user.id}</Text>
@@ -42,25 +43,6 @@ class UserScreen extends React.Component {
             </View>
         );
     }
-}
-
-function AvatarAYM(props) {
-    if (props.avatar === null || props.avatar === '' || props.avatar === 'https://....') {
-        return (<Avatar
-            xlarge
-            rounded
-            icon={{name: 'user', type: 'font-awesome'}}
-            onPress={() => console.log("Works!")}
-            activeOpacity={0.7}
-        />);
-    }
-    return (<Avatar
-        xlarge
-        rounded
-        source={{uri: props.avatar}}
-        onPress={() => console.log("Works!")}
-        activeOpacity={0.7}
-    />);
 }
 
 /*
