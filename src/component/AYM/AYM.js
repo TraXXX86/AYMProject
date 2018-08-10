@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Text, View, ActivityIndicator, StyleSheet} from 'react-native';
-import {Header, Icon} from 'react-native-elements';
+import {View, ActivityIndicator, StyleSheet} from 'react-native';
+import {Header, Icon, Text, Avatar} from 'react-native-elements';
 
 import PptReader from '../PptReader/PptReader';
 import UserViewer from '../UserViewer/UserViewer';
+import AYMButton from '../AYMButton';
 import {withNavigation} from 'react-navigation';
 import {responsive} from "react-native-responsive-ui";
 
@@ -12,25 +13,27 @@ class AYM extends Component {
 
     constructor(props) {
         super(props);
-        let ws_client = new WebSocket(props.server);
+        if (props.server != null && props.server !== '') {
+            let ws_client = new WebSocket(props.server);
 
-        // Create function to use binding this
-        function doWsInit(event) {
-            console.log('REQUEST_JOIN for user : ' + props.user_id);
-            ws_client.send('{ "meeting": {"id": "' + this.props.meeting_id + '"}, "event": "REQUEST_JOIN", "user": {"id": "' + props.user_id + '","type": "' + props.user_profil + '","name": "' + props.user_name + '","avatar": "https://...."}}');
+            // Create function to use binding this
+            function doWsInit(event) {
+                console.log('REQUEST_JOIN for user : ' + props.user_id);
+                ws_client.send('{ "meeting": {"id": "' + this.props.meeting_id + '"}, "event": "REQUEST_JOIN", "user": {"id": "' + props.user_id + '","type": "' + props.user_profil + '","name": "' + props.user_name + '","avatar": "https://...."}}');
+            }
+
+            ws_client.onopen = doWsInit.bind(this);
+
+            // Create function to use binding this
+            function doWsCall(event) {
+                var message = JSON.parse(event.data);
+                this.processServerReturn(message);
+            }
+
+            ws_client.onmessage = doWsCall.bind(this);
+
+            this.ws_client = ws_client;
         }
-
-        ws_client.onopen = doWsInit.bind(this);
-
-        // Create function to use binding this
-        function doWsCall(event) {
-            var message = JSON.parse(event.data);
-            this.processServerReturn(message);
-        }
-
-        ws_client.onmessage = doWsCall.bind(this);
-
-        this.ws_client = ws_client;
         this.state = {
             slide: {
                 id: 1
@@ -205,6 +208,33 @@ class AYM extends Component {
                     </View> : '' }
                 </View>
             );
+        } else if (this.ws_client == null && this.state.meeting == null) {
+            return (
+                <View style={{flex: 1}}>
+                    <HeaderAYM mode={mode} navigation={this.props.navigation}/>
+                    <View style={{flex: 12, alignItems: 'center', justifyContent: 'center'}}>
+                        <Avatar
+                            xlarge
+                            rounded
+                            overlayContainerStyle={{backgroundColor: '#dd0000'}}
+                            icon={{
+                                name: 'exclamation-triangle',
+                                type: 'font-awesome',
+                                color: '#fff',
+                            }}
+                            activeOpacity={0.7}
+                        />
+                        <Text h3>Unable to access server, please try again or contact your administrator</Text>
+                    </View>
+                    <View style={{flex: 4}}>
+                        <AYMButton
+                            title="Back to previous page"
+                            icon={{name: 'arrow-circle-o-left', type: 'font-awesome'}}
+                            onPress={() => this.props.navigation.goBack()}
+                        />
+                    </View>
+                </View>
+            );
         } else {
             return (
                 <View style={{flex: 1}}>
@@ -221,34 +251,36 @@ class AYM extends Component {
 function HeaderAYM(props) {
     if (props.mode !== 'landscape') {
         return (
-            <View>
-                <Header
-                    outerContainerStyles={{paddingBottom: 8}}
-                    leftComponent={
-                        <Icon
-                            name='sign-out'
-                            type='font-awesome'
-                            color='#fff'
-                            size={30}
-                            onPress={() => {
-                                props.navigation.navigate('Home');
-                            }}
-                        />
-                    }
-                    centerComponent={{text: props.title ? props.title : 'Animate Your Meeting', style: {color: '#fff', paddingBottom: 8}}}
-                    rightComponent={
-                        <Icon
-                            name='question-circle'
-                            type='font-awesome'
-                            color='#fff'
-                            size={30}
-                            onPress={() => {
-                                props.navigation.navigate('Help');
-                            }}
-                        />
-                    }
-                />
-            </View>)
+            <Header
+                outerContainerStyles={{paddingBottom: 8}}
+                leftComponent={
+                    <Icon
+                        name='sign-out'
+                        type='font-awesome'
+                        color='#fff'
+                        size={30}
+                        onPress={() => {
+                            props.navigation.navigate('Home');
+                        }}
+                    />
+                }
+                centerComponent={{
+                    text: props.title ? props.title : 'Animate Your Meeting',
+                    style: {color: '#fff', paddingBottom: 8}
+                }}
+                rightComponent={
+                    <Icon
+                        name='question-circle'
+                        type='font-awesome'
+                        color='#fff'
+                        size={30}
+                        onPress={() => {
+                            props.navigation.navigate('Help');
+                        }}
+                    />
+                }
+            />
+        )
     } else {
         return (<View style={{flex: 2, backgroundColor: '#3D6DCC'}}>
         </View>);
