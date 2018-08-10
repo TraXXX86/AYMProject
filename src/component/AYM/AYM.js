@@ -3,8 +3,11 @@ import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import {Header, Icon, Text, Avatar} from 'react-native-elements';
 
 import PptReader from '../PptReader/PptReader';
+import NavigationPanel from './NavigationPanel';
 import UserViewer from '../UserViewer/UserViewer';
-import AYMButton from '../AYMButton';
+import AYMError from '../AYMError';
+import AYMHeader from '../AYMHeader';
+
 import {withNavigation} from 'react-navigation';
 import {responsive} from "react-native-responsive-ui";
 
@@ -35,9 +38,6 @@ class AYM extends Component {
             this.ws_client = ws_client;
         }
         this.state = {
-            slide: {
-                id: 1
-            },
             read_only: props.user_profil === 'learner',
             current_user_name: props.user_name,
         };
@@ -78,31 +78,37 @@ class AYM extends Component {
                 break;
             case "INFO_MEETING":
                 meetingToUse = message.meeting;
+                // TODO : uncomment to use received slides
                 slideToUse = message.meeting.current_slide;
                 usersToUse = message.meeting.users;
-                console.log('INFO_MEETING : Meeting[' + meetingToUse.id + '] Slide[' + slideToUse.id + ']');
+                console.log('INFO_MEETING : Meeting[' + meetingToUse.id + ']');
                 // Get Image url
                 this.imgServerUri = message.meeting.server.slide_uri;
-                this.slides = message.meeting.slides;
-                imageToUse = this.generateImgUrl(this.imgServerUri, message.meeting.id, message.meeting.current_slide.id);
-                // Get previous and next slide id
-                let slides_nav = this.processSlidesList(this.slides, message.meeting.current_slide.id);
-                nextSlideToUse = slides_nav.next;
-                previousSlideToUse = slides_nav.previous;
+                if (slideToUse != null) {
+                    this.slides = message.meeting.slides;
+                    imageToUse = this.generateImgUrl(this.imgServerUri, message.meeting.id, slideToUse.id);
+
+                    // Get previous and next slide id
+                    let slides_nav = this.processSlidesList(this.slides, slideToUse.id);
+                    nextSlideToUse = slides_nav.next;
+                    previousSlideToUse = slides_nav.previous;
+                }
                 break;
             case "SLIDE":
+                // TODO : uncomment to use received slides
                 slideToUse = message.meeting.current_slide;
                 console.log('SLIDE : Meeting[' + meetingToUse.id + '] Slide[' + slideToUse.id + ']');
-                imageToUse = this.generateImgUrl(this.imgServerUri, message.meeting.id, message.meeting.current_slide.id);
-                // Get previous and next slide id
-                slides_nav = this.processSlidesList(this.slides, message.meeting.current_slide.id);
-                nextSlideToUse = slides_nav.next;
-                previousSlideToUse = slides_nav.previous;
+                if (slideToUse != null) {
+                    imageToUse = this.generateImgUrl(this.imgServerUri, message.meeting.id, slideToUse.id);
+                    // Get previous and next slide id
+                    slides_nav = this.processSlidesList(this.slides, slideToUse.id);
+                    nextSlideToUse = slides_nav.next;
+                    previousSlideToUse = slides_nav.previous;
+                }
                 break;
             default:
                 break;
         }
-
         // Update component status
         this.setState({
             meeting: meetingToUse,
@@ -185,105 +191,83 @@ class AYM extends Component {
         const {width, height} = this.props.window;
         const mode = height > width ? "portrait" : "landscape";
 
-        if (this.state.meeting != null && this.state.slide != null) {
-            let styleToUse = styles.ppt_reader;
-            if (this.state.read_only) {
-                styleToUse = styles.ppt_reader_read_only;
-            }
-            return (
-                <View style={{flex: 1}}>
-                    <HeaderAYM mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
-                    <WarningMessage error={this.state.error}/>
-                    <View style={styleToUse}>
-                        <PptReader wsclient={this.ws_client}
-                                   meeting_id={this.state.meeting.id}
-                                   slide_title={this.state.slide.title}
-                                   image={this.state.image}
-                                   next_slide={this.state.next_slide}
-                                   previous_slide={this.state.previous_slide}
-                                   read_only={this.state.read_only}/>
+        if (this.state.meeting != null) {
+            // If we have a meeting and a slide to show
+            if (this.state.slide != null) {
+                let styleToUse = styles.ppt_reader;
+                if (this.state.read_only) {
+                    styleToUse = styles.ppt_reader_read_only;
+                }
+                return (
+                    <View style={{flex: 1}}>
+                        <AYMHeader mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
+                        <WarningMessage error={this.state.error}/>
+                        <View style={styleToUse}>
+                            <PptReader slide_title={this.state.slide.title}
+                                       image={this.state.image}/>
+                            {!this.state.read_only ? <NavigationPanel
+                                wsclient={this.ws_client}
+                                meeting_id={this.state.meeting.id}
+                                next_slide={this.state.next_slide}
+                                previous_slide={this.state.previous_slide}
+
+                            /> : ''}
+                        </View>
+                        {mode !== 'landscape' ? <View style={{flex: 13}}>
+                            <UserViewer users={this.state.users}/>
+                        </View> : '' }
                     </View>
-                    {mode !== 'landscape' ? <View style={{flex: 13}}>
-                        <UserViewer users={this.state.users}/>
-                    </View> : '' }
-                </View>
-            );
+                );
+            }
+            // If we have a meeting without slides
+            else {
+                // If user is a learner
+                if (this.state.read_only) {
+                    return (
+                        <View style={{flex: 1}}>
+                            <AYMHeader mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
+                            <WarningMessage error={this.state.error}/>
+                            {mode !== 'landscape' ? <View style={{flex: 13}}>
+                                <UserViewer users={this.state.users}/>
+                            </View> : '' }
+                        </View>
+                    );
+                }
+                // If user is a teacher
+                else {
+                    return (
+                        <View style={{flex: 1}}>
+                            <AYMHeader mode={mode} title={this.state.meeting.titre} navigation={this.props.navigation}/>
+                            <WarningMessage error={this.state.error}/>
+                            <NavigationPanel
+                                wsclient={this.ws_client}
+                                next_slide={this.state.next_slide}
+                                previous_slide={this.state.previous_slide}
+                            />
+                            <View style={{flex: 13}}>
+                                <UserViewer users={this.state.users}/>
+                            </View>
+                        </View>
+                    );
+                }
+
+            }
         } else if (this.ws_client == null && this.state.meeting == null) {
             return (
-                <View style={{flex: 1}}>
-                    <HeaderAYM mode={mode} navigation={this.props.navigation}/>
-                    <View style={{flex: 12, alignItems: 'center', justifyContent: 'center'}}>
-                        <Avatar
-                            xlarge
-                            rounded
-                            overlayContainerStyle={{backgroundColor: '#dd0000'}}
-                            icon={{
-                                name: 'exclamation-triangle',
-                                type: 'font-awesome',
-                                color: '#fff',
-                            }}
-                            activeOpacity={0.7}
-                        />
-                        <Text h3>Unable to access server, please try again or contact your administrator</Text>
-                    </View>
-                    <View style={{flex: 4}}>
-                        <AYMButton
-                            title="Back to previous page"
-                            icon={{name: 'arrow-circle-o-left', type: 'font-awesome'}}
-                            onPress={() => this.props.navigation.goBack()}
-                        />
-                    </View>
-                </View>
+                <AYMError mode={mode}
+                          navigation={this.props.navigation}
+                          message='Unable to access server, please try again or contact your administrator'/>
             );
         } else {
             return (
                 <View style={{flex: 1}}>
-                    <HeaderAYM mode={mode} navigation={this.props.navigation}/>
+                    <AYMHeader mode={mode} navigation={this.props.navigation}/>
                     <View style={[styles.container, styles.horizontal]}>
                         <ActivityIndicator size="large" color="#0000ff"/>
                     </View>
                 </View>
             );
         }
-    }
-}
-
-function HeaderAYM(props) {
-    if (props.mode !== 'landscape') {
-        return (
-            <Header
-                outerContainerStyles={{paddingBottom: 8}}
-                leftComponent={
-                    <Icon
-                        name='sign-out'
-                        type='font-awesome'
-                        color='#fff'
-                        size={30}
-                        onPress={() => {
-                            props.navigation.navigate('Home');
-                        }}
-                    />
-                }
-                centerComponent={{
-                    text: props.title ? props.title : 'Animate Your Meeting',
-                    style: {color: '#fff', paddingBottom: 8}
-                }}
-                rightComponent={
-                    <Icon
-                        name='question-circle'
-                        type='font-awesome'
-                        color='#fff'
-                        size={30}
-                        onPress={() => {
-                            props.navigation.navigate('Help');
-                        }}
-                    />
-                }
-            />
-        )
-    } else {
-        return (<View style={{flex: 2, backgroundColor: '#3D6DCC'}}>
-        </View>);
     }
 }
 

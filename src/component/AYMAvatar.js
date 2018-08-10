@@ -10,7 +10,7 @@ class AYMAvatar extends React.Component {
                 medium = {this.props.medium}
                 xlarge = {this.props.xlarge}
                 rounded
-                icon={{name: 'user', type: 'font-awesome'}}
+                icon={{name: this.props.icon ? this.props.icon : 'user', type: 'font-awesome'}}
                 onPress={this.props.onPress}
                 activeOpacity={0.7}
             />);
