@@ -12,8 +12,8 @@ class CreateMeetingScreen extends React.Component {
         super(props);
         this.state = {
             user_name: 'Clara',
-            user_profil: 'teacher',
-            meeting_id: '1AF',
+            user_profil: 'trainer',
+            meeting_id: '5b7438ec4de4b',
         };
         this.navigation = this.props.navigation;
     }

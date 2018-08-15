@@ -13,7 +13,7 @@ class OpenMeetingScreen extends React.Component {
         this.state = {
             user_name: 'Clara',
             user_profil: 'learner',
-            meeting_id: '1AF',
+            meeting_id: '5b7438ec4de4b',
         };
         this.navigation = this.props.navigation;
     }

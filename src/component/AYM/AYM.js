@@ -22,7 +22,7 @@ class AYM extends Component {
             // Create function to use binding this
             function doWsInit(event) {
                 console.log('REQUEST_JOIN for user : ' + props.user_id);
-                ws_client.send('{ "meeting": {"id": "' + this.props.meeting_id + '"}, "event": "REQUEST_JOIN", "user": {"id": "' + props.user_id + '","type": "' + props.user_profil + '","name": "' + props.user_name + '","avatar": "https://...."}}');
+                ws_client.send('{ "meeting": {"id": "' + this.props.meeting_id + '"}, "event": "REQUEST_JOIN", "user": {"id": "' + props.user_id + '","type": "' + props.user_profil + '","name": "' + props.user_name + '","avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"}}');
             }
 
             ws_client.onopen = doWsInit.bind(this);
@@ -211,12 +211,12 @@ class AYM extends Component {
                                     meeting_id={this.state.meeting.id}
                                     next_slide={this.state.next_slide}
                                     previous_slide={this.state.previous_slide}
-                                /> : ''}
+                                /> : <Text></Text>}
                             </ScrollView>
                         </View>
                         {mode !== 'landscape' ? <View style={{flex: 13}}>
                             <UserViewer users={this.state.users}/>
-                        </View> : '' }
+                        </View> : <Text></Text> }
                     </View>
                 );
             }
@@ -230,7 +230,7 @@ class AYM extends Component {
                             <WarningMessage error={this.state.error}/>
                             {mode !== 'landscape' ? <View style={{flex: 13}}>
                                 <UserViewer users={this.state.users}/>
-                            </View> : '' }
+                            </View> : <Text></Text> }
                         </View>
                     );
                 }
@@ -251,7 +251,6 @@ class AYM extends Component {
                         </View>
                     );
                 }
-
             }
         } else if (this.ws_client == null && this.state.meeting == null) {
             return (
@@ -280,7 +279,7 @@ function WarningMessage(props) {
             </View>
         );
     } else {
-        return '';
+        return <Text></Text>;
     }
 }
 
