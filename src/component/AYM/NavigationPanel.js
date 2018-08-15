@@ -48,7 +48,7 @@ class NavigationPanel extends Component {
                                 icon={{name: 'plus-circle', type: 'font-awesome'}}
                                 title="Add Quiz"
                             />
-                        </View> : ''}
+                        </View> : <Text></Text>}
                         <View style={{flex: 1}}>
                             <AYMButton
                                 rightIcon={{name: 'angle-right', type: 'font-awesome'}}

@@ -21,6 +21,9 @@ class UserViewer extends Component {
     render() {
         const users = this.props.users;
         const orderedUsers = [].concat(users).sort(function (a, b) {
+            if(a.name == undefined || b.name == undefined){
+                return 0;
+            }
             var nameA = a.name.toLowerCase().normalize('NFD'), nameB = b.name.toLowerCase().normalize('NFD');
             if (nameA < nameB) return -1;
             if (nameA > nameB) return 1;
