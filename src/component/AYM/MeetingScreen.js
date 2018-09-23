@@ -10,7 +10,7 @@ class MeetingScreen extends React.Component {
         let server_url = navigation.getParam('server_url');
         if(server_url == null || server_url === ''){
             // TODO : set server adress here
-            server_url = 'wss://aym.arbey.fr/ws';
+            server_url = '';
         }
         const meeting_id = navigation.getParam('meeting_id');
         const user_name = navigation.getParam('user_name');
