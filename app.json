@@ -1,6 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0",
+    "name": "Animate Your Meeting",
+		"sdkVersion": "27.0.0",
+		"icon": "./icon.png",
+		"description": "Basic app",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"ios": {
+			"bundleIdentifier": "com.mjaouen.aym"
+		},
     "splash": {
       "backgroundColor": "#3D6DCC",
       "resizeMode": "cover"
